@@ -37,8 +37,8 @@ Feature: Cart
   Scenario Outline: Test Social Media links in footer
     Then "<Social Media>" link in footer should be visible
     When the user clicks "<Social Media>" link from footer, it should open correct "<URL>" in a new tab
-        # title-format: <Social Media> link in footer should work
-
+    
+    # title-format: <Social Media> link in footer should work
     Examples:
       | Social Media | URL                                         |
       | Twitter/X    | https://x.com/saucelabs                     |
