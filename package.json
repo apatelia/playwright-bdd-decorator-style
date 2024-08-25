@@ -1,0 +1,21 @@
+{
+  "name": "playwright-bdd-decorator-style",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx bddgen && npx playwright test",
+    "tagged-test": "npx bddgen && npx playwright test --grep ",
+    "not-tagged-test": "npx bddgen && npx playwright test --grep-invert ",
+    "report": "npx playwright show-report reports/cucumber",
+    "report:debug": "npx playwright show-report reports/playwright"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.46.0",
+    "@types/node": "^22.2.0",
+    "playwright-bdd": "^7.2.2"
+  }
+}
