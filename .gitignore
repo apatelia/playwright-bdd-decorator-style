@@ -7,3 +7,8 @@ node_modules/
 
 # Playwright Tests generated from feature files.
 .features-gen/features/
+
+# file system files.
+.DS_Store
+Thumbs.db
+.directory
