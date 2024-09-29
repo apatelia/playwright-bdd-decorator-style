@@ -2,8 +2,8 @@ import { test as base } from 'playwright-bdd';
 import { LoginPage } from './LoginPage';
 import { ProductsPage } from './ProductsPage';
 import { CartPage } from './CartPage';
-import { Header } from './Header';
-import { Footer } from './Footer';
+import { Header } from './fragments/Header';
+import { Footer } from './fragments/Footer';
 
 type PageFixtures = {
   loginPage: LoginPage,

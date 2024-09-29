@@ -2,12 +2,12 @@
 Feature: User Login
 
   Background:
-    Given the User is on login page
+    Given I am on login page
 
   @valid_creds
   Scenario Outline: Test login with valid credentials
-    When the User tries to login with "<username>" as username and "<password>" as password
-    Then the User should be on Products page
+    When I try to login with "<username>" as username and "<password>" as password
+    Then I must be taken to Products page
 
     # title-format: User should be able to log in with valid login credentials => <username> / <password>
     Examples:
@@ -18,8 +18,8 @@ Feature: User Login
 
   @invalid_creds
   Scenario Outline: Test login with invalid credentials
-    When the User tries to login with "<username>" as username and "<password>" as password
-    Then the User should see invalid credentials error message
+    When I try to login with "<username>" as username and "<password>" as password
+    Then I should see invalid credentials error message
 
     # title-format: User should not be able to log in with invalid login credentials => <username> / <password>
     Examples:
@@ -30,5 +30,5 @@ Feature: User Login
 
   @locked_out_user
   Scenario: Test that a Locked out user is not able to login despite using valid login credentials
-    When the User tries to login with "locked_out_user" as username and "secret_sauce" as password
-    Then the User should see a locked out error message
+    When I try to login with "locked_out_user" as username and "secret_sauce" as password
+    Then I should see a locked out error message

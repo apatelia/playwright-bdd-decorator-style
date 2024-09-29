@@ -2,11 +2,12 @@
 Feature: Cart
 
   Background:
-    Given the User is on login page
-    When the User tries to login with "standard_user" as username and "secret_sauce" as password
-    Then the User should be on Products page
-    When the user adds "Sauce Labs Backpack" to the cart
-    And is on the cart page
+    Given I am on login page
+    When I try to login with "standard_user" as username and "secret_sauce" as password
+    Then I must be taken to Products page
+    When I add "Sauce Labs Backpack" to the cart
+    Then I click on the cart icon from the header
+    And I am on the cart page
 
   @verify_product_details
   Scenario: Test that the correct product is added to the cart
@@ -15,28 +16,29 @@ Feature: Cart
 
   @remove_from_cart
   Scenario: Test removal of a product from the cart
-    Then the user removes "Sauce Labs Backpack" from the cart
+    Then I remove "Sauce Labs Backpack" from the cart
     Then the item count badge must not be displayed on cart icon in header
 
   @continue_shopping
   Scenario: Test that clicking on 'Continue Shopping' button takes back to Products page
-    When the user clicks on the `Continue Shopping` button
-    Then the User should be on Products page
+    When I click on the `Continue Shopping` button
+    Then I must be taken to Products page
 
   @begin_checkout
   Scenario: Test that clicking on `Checkout` button starts checkout
-    When the user clicks on the `Checkout` button
-    Then the User should be on Your Information page
+    When I click on the `Checkout` button
+    Then I should be on Your Information page
 
   @logout
-  Scenario: Test that the user is able to log out from the cart page
-    When the user clicks Log out from hamburger menu
-    Then the user must be logged out
+  Scenario: Test that I am able to log out from the cart page
+    When I click Log out from hamburger menu
+    Then I must be logged out
 
   @cart_footer @social_media_links
   Scenario Outline: Test Social Media links in footer
     Then "<Social Media>" link in footer should be visible
-    When the user clicks "<Social Media>" link from footer, it should open correct "<URL>" in a new tab
+    When I click "<Social Media>" link from footer
+    And it should open correct "<URL>" in a new tab
     
     # title-format: <Social Media> link in footer should work
     Examples:
