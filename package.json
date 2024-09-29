@@ -7,6 +7,10 @@
     "test": "npx bddgen && npx playwright test",
     "tagged-test": "npx bddgen && npx playwright test --grep ",
     "not-tagged-test": "npx bddgen && npx playwright test --grep-invert ",
+    "lint": "npx eslint . --fix",
+    "lint:check": "npx eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "report": "npx playwright show-report reports/cucumber",
     "report:debug": "npx playwright show-report reports/playwright"
   },
@@ -16,6 +20,12 @@
   "devDependencies": {
     "@playwright/test": "^1.47.2",
     "@types/node": "^22.7.4",
-    "playwright-bdd": "^7.4.2"
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.9.0",
+    "playwright-bdd": "^7.4.2",
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.7.0"
   }
 }

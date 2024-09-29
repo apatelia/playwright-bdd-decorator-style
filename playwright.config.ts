@@ -1,9 +1,9 @@
-import { defineConfig, devices } from '@playwright/test';
-import { cucumberReporter, defineBddConfig } from 'playwright-bdd';
+import { defineConfig, devices } from "@playwright/test";
+import { cucumberReporter, defineBddConfig } from "playwright-bdd";
 
 const testDir = defineBddConfig({
-  features: 'features/*.feature',
-  steps: 'pages/PageFixtures.ts'
+  features: "features/*.feature",
+  steps: "pages/PageFixtures.ts"
 });
 
 /**
@@ -20,27 +20,29 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 6,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? 'github' : [
-    ['list'],
-    [ 'html', { outputFolder: 'reports/playwright/' } ],
-    cucumberReporter('html', { outputFile: 'reports/cucumber/index.html' }),
-  ],
+  reporter: process.env.CI
+    ? "github"
+    : [
+        ["list"],
+        ["html", { outputFolder: "reports/playwright/" }],
+        cucumberReporter("html", { outputFile: "reports/cucumber/index.html" })
+      ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: "on-first-retry"
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices[ 'Desktop Chrome' ] },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] }
     },
 
     {
-      name: 'firefox',
-      use: { ...devices[ 'Desktop Firefox' ] },
-    },
-  ],
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] }
+    }
+  ]
 });

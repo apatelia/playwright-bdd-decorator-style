@@ -16,7 +16,7 @@ class CartPage {
     this.cartHeading = page.getByText("Your Cart");
     this.allProductsInCart = page.locator("div.cart_item");
     this.continueShoppingButton = page.getByRole("button", {
-      name: "Go back CONTINUE SHOPPING",
+      name: "Go back CONTINUE SHOPPING"
     });
     this.checkoutButton = page.getByRole("button", { name: "CHECKOUT" });
   }
@@ -35,12 +35,10 @@ class CartPage {
 
   async getProductQuantity(productName: string): Promise<number> {
     const product: Locator = this.allProductsInCart.filter({
-      hasText: productName,
+      hasText: productName
     });
 
-    const quantity = `${await product
-      .locator("div.cart_quantity")
-      .textContent()}`;
+    const quantity = `${await product.locator("div.cart_quantity").textContent()}`;
 
     return quantity !== "" ? +quantity : 0;
   }
@@ -56,12 +54,10 @@ class CartPage {
     productPrice: string
   ): Promise<void> {
     const product: Locator = this.allProductsInCart.filter({
-      hasText: productName,
+      hasText: productName
     });
 
-    const price = `${await product
-      .locator("div.inventory_item_price")
-      .textContent()}`;
+    const price = `${await product.locator("div.inventory_item_price").textContent()}`;
     expect(price).toEqual(productPrice);
   }
 
@@ -76,7 +72,7 @@ class CartPage {
   @Then("I remove {string} from the cart")
   async userRemovesProductFromCart(productName: string): Promise<void> {
     const product: Locator = this.allProductsInCart.filter({
-      hasText: productName,
+      hasText: productName
     });
 
     const removeButton = product.locator("button");

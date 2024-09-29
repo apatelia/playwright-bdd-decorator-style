@@ -12,16 +12,19 @@ BDD/test steps are implemented using typescript decorator style supported by pla
    ```sh
    cd playwright-bdd-decorator-style
    ```
+
 3. Install dependencies.
 
    ```sh
    npm install
    ```
+
 4. Install browsers.
 
    ```sh
    npx playwright install
    ```
+
 5. Run tests.
 
    ```sh
@@ -38,6 +41,7 @@ BDD/test steps are implemented using typescript decorator style supported by pla
    # Run all tests NOT having @cart tag.
    npm run not-tagged-test "cart"
    ```
+
 6. View nice HTML reports.
 
    ```sh

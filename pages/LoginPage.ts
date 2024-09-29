@@ -1,9 +1,10 @@
-import { Locator, Page, expect } from '@playwright/test';
-import { test } from './PageFixtures';
-import { Fixture, Given, When, Then, } from 'playwright-bdd/decorators';
+import { Locator, Page, expect } from "@playwright/test";
+import { test } from "./PageFixtures";
+import { Fixture, Given, When, Then } from "playwright-bdd/decorators";
 
-export @Fixture<typeof test>(`loginPage`) class LoginPage {
-
+export
+@Fixture<typeof test>(`loginPage`)
+class LoginPage {
   readonly page: Page;
   readonly username: Locator;
   readonly password: Locator;
@@ -19,35 +20,39 @@ export @Fixture<typeof test>(`loginPage`) class LoginPage {
   }
 
   @Given(`I am on login page`)
-  async goto (): Promise<void> {
-    await this.page.goto('https://www.saucedemo.com');
-  };
+  async goto(): Promise<void> {
+    await this.page.goto("https://www.saucedemo.com");
+  }
 
   @When(`I try to login with {string} as username and {string} as password`)
-  async doLogin (username: string, password: string): Promise<void> {
+  async doLogin(username: string, password: string): Promise<void> {
     await this.username.fill(username);
     await this.password.fill(password);
     await this.loginButton.click();
   }
 
-  @Then('I should see a locked out error message')
-  async userShouldSeeLockedOutMessage () {
+  @Then("I should see a locked out error message")
+  async userShouldSeeLockedOutMessage(): Promise<void> {
     await expect(this.errorMessage).toBeVisible();
 
     const errorText = await this.errorMessage.textContent();
-    expect(errorText).toEqual('Epic sadface: Sorry, this user has been locked out.');
-  };
+    expect(errorText).toEqual(
+      "Epic sadface: Sorry, this user has been locked out."
+    );
+  }
 
-  @Then('I should see invalid credentials error message')
-  async userShouldSeeInvalidCredsError () {
+  @Then("I should see invalid credentials error message")
+  async userShouldSeeInvalidCredsError(): Promise<void> {
     await expect(this.errorMessage).toBeVisible();
 
     const errorText = await this.errorMessage.textContent();
-    expect(errorText).toEqual('Epic sadface: Username and password do not match any user in this service');
-  };
+    expect(errorText).toEqual(
+      "Epic sadface: Username and password do not match any user in this service"
+    );
+  }
 
-  @Then('I must be logged out')
-  async shouldBeLoggedOut () {
+  @Then("I must be logged out")
+  async shouldBeLoggedOut(): Promise<void> {
     await expect(this.loginButton).toBeVisible();
-  };
+  }
 }

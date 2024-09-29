@@ -20,7 +20,7 @@ class Header {
     this.hamburgerMenuButton = page.getByRole("button", { name: "Open Menu" });
     this.logoutMenuEntry = page.getByRole("link", { name: "Logout" });
     this.hamburgerMenuCloseButton = page.getByRole("button", {
-      name: "Close Menu",
+      name: "Close Menu"
     });
     this.cartLink = page.locator("a.shopping_cart_link");
     this.cartItemCount = page.locator("span.shopping_cart_badge");
