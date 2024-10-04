@@ -3,7 +3,7 @@ import { cucumberReporter, defineBddConfig } from "playwright-bdd";
 
 const testDir = defineBddConfig({
   features: "features/*.feature",
-  steps: "pages/PageFixtures.ts"
+  steps: "pages/fixtures/page.fixtures.ts",
 });
 
 /**
@@ -23,26 +23,26 @@ export default defineConfig({
   reporter: process.env.CI
     ? "github"
     : [
-        ["list"],
-        ["html", { outputFolder: "reports/playwright/" }],
-        cucumberReporter("html", { outputFile: "reports/cucumber/index.html" })
-      ],
+      [ "list" ],
+      [ "html", { outputFolder: "reports/playwright/" } ],
+      cucumberReporter("html", { outputFile: "reports/cucumber/index.html" }),
+    ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry"
+    trace: "on-first-retry",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] }
+      use: { ...devices[ "Desktop Chrome" ] },
     },
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] }
-    }
-  ]
+      use: { ...devices[ "Desktop Firefox" ] },
+    },
+  ],
 });
