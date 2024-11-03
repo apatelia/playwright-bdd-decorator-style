@@ -13,8 +13,8 @@ class CartPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.cartHeading = page.getByText("Your Cart");
-    this.allProductsInCart = page.locator("div.cart_item");
+    this.cartHeading = page.getByTestId("title");
+    this.allProductsInCart = page.getByTestId("inventory-item");
     this.continueShoppingButton = page.getByRole("button", { name: "Go back CONTINUE SHOPPING" });
     this.checkoutButton = page.getByRole("button", { name: "CHECKOUT" });
   }
@@ -34,34 +34,34 @@ class CartPage {
   async getProductQuantity(productName: string): Promise<number> {
     const product: Locator = this.allProductsInCart.filter({ hasText: productName });
 
-    const quantity = `${await product.locator("div.cart_quantity").textContent()}`;
+    const quantity = `${await product.getByTestId("item-quantity").textContent()}`;
 
     return quantity !== "" ? +quantity : 0;
   }
 
   @Given("I am on the cart page")
   async userIsOnCartPage(): Promise<void> {
-    await expect(this.page).toHaveURL(/.*cart.html$/);
+    await expect.soft(this.page).toHaveURL(/.*cart.html$/);
   }
 
   @Then("price of the {string} in cart must match {string}")
   async productPriceInCartBadgeMustMatch(productName: string, productPrice: string): Promise<void> {
     const product: Locator = this.allProductsInCart.filter({ hasText: productName });
 
-    const price = `${await product.locator("div.inventory_item_price").textContent()}`;
-    expect(price).toEqual(productPrice);
+    const price = `${await product.getByTestId("inventory-item-price").textContent()}`;
+    expect.soft(price).toStrictEqual(productPrice);
   }
 
   @Then("quantity of the {string} in cart must match {int}")
   async productQuantityInCartBadgeMustMatch(productName: string, productQuantity: number): Promise<void> {
-    expect(await this.getProductQuantity(productName)).toEqual(productQuantity);
+    expect.soft(await this.getProductQuantity(productName)).toStrictEqual(productQuantity);
   }
 
   @Then("I remove {string} from the cart")
   async userRemovesProductFromCart(productName: string): Promise<void> {
     const product: Locator = this.allProductsInCart.filter({ hasText: productName });
 
-    const removeButton = product.locator("button");
+    const removeButton = product.getByRole("button", { name: "Remove" });
     await removeButton.click();
   }
 
@@ -77,6 +77,6 @@ class CartPage {
 
   @When("I should be on Your Information page")
   async userShouldBeOnYourInfoPage(): Promise<void> {
-    await expect(this.page).toHaveURL(/.*checkout-step-one.html/);
+    await expect.soft(this.page).toHaveURL(/.*checkout-step-one.html/);
   }
 }

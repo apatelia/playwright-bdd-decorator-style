@@ -11,14 +11,14 @@ class Footer {
   readonly linkedInLink: Locator;
   readonly copyrightText: Locator;
 
-  private newTab: Page;
+  private _newTab: Page;
 
   constructor(page: Page) {
     this.page = page;
     this.twitterLink = page.getByRole("link", { name: "Twitter" });
     this.facebookLink = page.getByRole("link", { name: "Facebook" });
     this.linkedInLink = page.getByRole("link", { name: "LinkedIn" });
-    this.copyrightText = page.locator("div.footer_copy");
+    this.copyrightText = page.getByTestId("footer-copy");
   }
 
   async clickTwitterLink(): Promise<void> {
@@ -41,13 +41,13 @@ class Footer {
   async socialMediaLinkShouldBeVisible(link: string): Promise<void> {
     switch (link) {
       case "Twitter/X":
-        await expect(this.twitterLink).toBeEnabled();
+        await expect.soft(this.twitterLink).toBeEnabled();
         break;
       case "Facebook":
-        await expect(this.facebookLink).toBeEnabled();
+        await expect.soft(this.facebookLink).toBeEnabled();
         break;
       case "LinkedIn":
-        await expect(this.linkedInLink).toBeEnabled();
+        await expect.soft(this.linkedInLink).toBeEnabled();
         break;
       default:
         break;
@@ -72,20 +72,20 @@ class Footer {
         break;
     }
 
-    this.newTab = await newPagePromise;
-    await this.newTab.waitForLoadState("domcontentloaded");
+    this._newTab = await newPagePromise;
+    await this._newTab.waitForLoadState("domcontentloaded");
   }
 
   @Then("it should open correct {string} in a new tab")
   async verifySocialMediaPageUrl(url: string): Promise<void> {
     const regexPattern = `.*${url}.*`;
     const regex = new RegExp(regexPattern);
-    await expect(this.newTab).toHaveURL(regex);
+    await expect.soft(this._newTab).toHaveURL(regex);
   }
 
   @Then("copyright text in footer should be visible")
   async copyrightTextShouldBeVisible(): Promise<void> {
-    await expect(this.copyrightText).toBeVisible();
+    await expect.soft(this.copyrightText).toBeVisible();
   }
 
   @Then("the copyright text contents should be correct")
@@ -93,6 +93,6 @@ class Footer {
     const currentYear = new Date().getFullYear();
     const textContent = await this.getCopyrightTextContent();
 
-    expect(textContent).toEqual(`© ${currentYear} Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy`);
+    expect.soft(textContent).toStrictEqual(`© ${currentYear} Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy`);
   }
 }

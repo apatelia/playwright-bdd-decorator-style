@@ -13,10 +13,10 @@ class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.username = page.locator("[data-test=\"username\"]");
-    this.password = page.locator("[data-test=\"password\"]");
-    this.loginButton = page.locator("[data-test=\"login-button\"]");
-    this.errorMessage = page.locator("[data-test=\"error\"]");
+    this.username = page.getByTestId("username");
+    this.password = page.getByTestId("password");
+    this.loginButton = page.getByTestId("login-button");
+    this.errorMessage = page.getByTestId("error");
   }
 
   @Given("I am on login page")
@@ -33,22 +33,20 @@ class LoginPage {
 
   @Then("I should see a locked out error message")
   async userShouldSeeLockedOutMessage(): Promise<void> {
-    await expect(this.errorMessage).toBeVisible();
+    await expect.soft(this.errorMessage).toBeVisible();
 
-    const errorText = await this.errorMessage.textContent();
-    expect(errorText).toEqual("Epic sadface: Sorry, this user has been locked out.");
+    await expect.soft(this.errorMessage).toHaveText("Epic sadface: Sorry, this user has been locked out.");
   }
 
   @Then("I should see invalid credentials error message")
   async userShouldSeeInvalidCredentialsError(): Promise<void> {
-    await expect(this.errorMessage).toBeVisible();
+    await expect.soft(this.errorMessage).toBeVisible();
 
-    const errorText = await this.errorMessage.textContent();
-    expect(errorText).toEqual("Epic sadface: Username and password do not match any user in this service");
+    await expect.soft(this.errorMessage).toHaveText("Epic sadface: Username and password do not match any user in this service");
   }
 
   @Then("I must be logged out")
   async shouldBeLoggedOut(): Promise<void> {
-    await expect(this.loginButton).toBeVisible();
+    await expect.soft(this.loginButton).toBeVisible();
   }
 }

@@ -18,8 +18,8 @@ class Header {
     this.hamburgerMenuButton = page.getByRole("button", { name: "Open Menu" });
     this.logoutMenuEntry = page.getByRole("link", { name: "Logout" });
     this.hamburgerMenuCloseButton = page.getByRole("button", { name: "Close Menu" });
-    this.cartLink = page.locator("a.shopping_cart_link");
-    this.cartItemCount = page.locator("span.shopping_cart_badge");
+    this.cartLink = page.getByTestId("shopping-cart-link");
+    this.cartItemCount = page.getByTestId("shopping-cart-badge");
   }
 
   async getCartItemCount(): Promise<number> {
@@ -37,12 +37,12 @@ class Header {
   @Then("the cart item badge must show correct count of {int}")
   async shouldShowCorrectProductsCount(count: number): Promise<void> {
     const cartItemCount = await this.getCartItemCount();
-    expect(cartItemCount).toEqual(count);
+    expect.soft(cartItemCount).toStrictEqual(count);
   }
 
   @Then("the item count badge must not be displayed on cart icon in header")
   async itemCountMustNotBeDisplayed(): Promise<void> {
-    await expect(this.cartItemCount).toHaveCount(0);
+    await expect.soft(this.cartItemCount).toHaveCount(0);
   }
 
   @Then("I click on the cart icon from the header")

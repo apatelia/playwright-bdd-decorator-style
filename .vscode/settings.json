@@ -40,8 +40,4 @@
   "cSpell.words": [
     "sadface"
   ],
-  "[cucumber]": {
-    "editor.defaultFormatter": "CucumberOpen.cucumber-official",
-    "editor.defaultFoldingRangeProvider": "CucumberOpen.cucumber-official"
-  },
 }
