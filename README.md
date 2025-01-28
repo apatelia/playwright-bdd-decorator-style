@@ -7,7 +7,7 @@ BDD/test steps are implemented using typescript decorator style supported by pla
 ## Usage
 
 1. Download the zip file or clone this repository.
-2. Change the directory to `playwright-with-bdd`.
+2. Change the directory to `playwright-bdd-decorator-style`.
 
    ```sh
    cd playwright-bdd-decorator-style

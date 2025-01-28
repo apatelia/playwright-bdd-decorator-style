@@ -20,7 +20,7 @@ export default [
   },
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: globals.node,
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname
@@ -79,6 +79,7 @@ export default [
   },
   {
     rules: {
+      "no-unused-vars": "off",
       "eqeqeq": [ "error", "smart" ],
       "no-console": "error",
       "no-warning-comments": "warn",
@@ -100,6 +101,14 @@ export default [
       "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/no-deprecated": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "all",
+          "caughtErrors": "all",
+        }
+      ],
       "@typescript-eslint/naming-convention": [
         "error",
         { selector: "variableLike", format: [ "camelCase" ] },
